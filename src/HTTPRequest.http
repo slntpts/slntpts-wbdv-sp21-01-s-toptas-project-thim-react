@@ -1,0 +1,23 @@
+## curl -X GET
+##  'https://graph.instagram.com/me/media?fields=id,caption&access_token=IGQVJYcl9KRzJPTXlFSDREUHE0aEh5LVJIbUVtWlZAURUpRTEhFN1RVc3BJNzZA4b1FaeEJjYnBNTVhDdEUzdmpBUVBzXy0ydTNHaDVUYUpsWEZARWm9CRkRnS1BjQWJnSURUSHhab3B3'
+#GET https://graph.instagram.com/me/media?fields=id,caption,media_url,media&access_token=IGQVJYcl9KRzJPTXlFSDREUHE0aEh5LVJIbUVtWlZAURUpRTEhFN1RVc3BJNzZA4b1FaeEJjYnBNTVhDdEUzdmpBUVBzXy0ydTNHaDVUYUpsWEZARWm9CRkRnS1BjQWJnSURUSHhab3B3
+#
+####
+
+
+
+#GET https://graph.instagram.com/17841443197746420/?fileds=media_url
+#  ?access_token=IGQVJYcl9KRzJPTXlFSDREUHE0aEh5LVJIbUVtWlZAURUpRTEhFN1RVc3BJNzZA4b1FaeEJjYnBNTVhDdEUzdmpBUVBzXy0ydTNHaDVUYUpsWEZARWm9CRkRnS1BjQWJnSURUSHhab3B3
+#
+####
+
+## curl -X GET
+##  'https://graph.instagram.com/17895695668004550?fields=id,media_type,media_url,username,timestamp&access_token=IGQVJ...'
+#GET https://graph.instagram.com/17841443197746420?fields=id&access_token=IGQVJYcl9KRzJPTXlFSDREUHE0aEh5LVJIbUVtWlZAURUpRTEhFN1RVc3BJNzZA4b1FaeEJjYnBNTVhDdEUzdmpBUVBzXy0ydTNHaDVUYUpsWEZARWm9CRkRnS1BjQWJnSURUSHhab3B3
+
+
+###
+
+
+GET https://graph.instagram.com/17865906137291189?fields=media_type,media_url&access_token=IGQVJYcl9KRzJPTXlFSDREUHE0aEh5LVJIbUVtWlZAURUpRTEhFN1RVc3BJNzZA4b1FaeEJjYnBNTVhDdEUzdmpBUVBzXy0ydTNHaDVUYUpsWEZARWm9CRkRnS1BjQWJnSURUSHhab3B3
+
