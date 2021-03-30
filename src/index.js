@@ -1,14 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {combineReducers, createStore} from "redux";
+import imageReducer from "./reducers/image-reducer";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+const reducer = combineReducers({
+    //combine all reducer in one single reducer, as map-value pairs. We will determine which one we are gonna use.
+    //and once we do that we provide reducer as a top reducer to the createStore.
+    imageReducer: imageReducer
+})
+
+const store = createStore(reducer)//we grab the store from image reducer.
+
+render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
   document.getElementById('root')
 );
 

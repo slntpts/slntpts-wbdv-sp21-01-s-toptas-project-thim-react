@@ -1,24 +1,27 @@
 import React, {useState, useEffect} from 'react'
+import {connect} from "react-redux";
 import  {Link, useParams, useHistory} from 'react-router-dom'
 import imageService from "../services/image-service"
 import './search-screen.css';
 
-const SearchScreen = () => {
+const SearchScreen = (
+    {
+        images = [],
+        findImagesByText,
+    }) => {
     const history = useHistory();
     const {text} = useParams()//text(comes from url in Apps.js) is defined to be used as a parameter here.
     const [searchText, setSearchText] = useState(text)
-    const [results, setResults] = useState({data: []})
+
     useEffect(() => {
-        setSearchText(text)
-        findImagesByText(text)
+
+        if (text !== "undefined") {
+            setSearchText(text)
+            findImagesByText(text)
+        }
+
     }, [])
-    const findImagesByText = (text) => {
-        history.push(text)
-        imageService.findImagesByText(text)
-            .then((results) => {
-                setResults(results)
-            })
-    }
+
     return(
         <div>
             <h1>Search Screen</h1>
@@ -31,14 +34,16 @@ const SearchScreen = () => {
                 onClick={() => {
                     findImagesByText(searchText)
                 }}
-                className="btn btn-primary">
-                Search
+                className="btn btn-primary wbdv-btn-search">
+                <Link to={`/search/${searchText}`}>
+                    Search
+                </Link>
             </button>
             <ul className="list-group">
                 {
                     //TODO: Write searchText & searchText instead of text && text to retrieve images on the fly
                     //http://localhost:3000/search/2020
-                    results && results.data && results.data.filter((image) =>
+                    images && images.data && images.data.filter((image) =>
                         (image.caption.toLowerCase().includes(text && text.toLowerCase()))).map(data => {
                             return (
                                 <li className="list-group-item">
@@ -48,22 +53,29 @@ const SearchScreen = () => {
                                 </li>
                             )
                     })
-
-                    // results && results.data && results.data.map((image) => {
-                    //     return(
-                    //         <li className="list-group-item">
-                    //             <Link to={`/search/text`}>
-                    //                 {image.id}
-                    //                 {/*<img src="'+image.images.low_resolution.url+'"/>*/}
-                    //             </Link>
-                    //         </li>
-                    //     )
-                    // })
                 }
-
             </ul>
         </div>
     )
 }
 
-export default SearchScreen
+const stpm = (state) => {
+    return{
+        images: state.imageReducer.images
+    }
+}
+
+const dtpm = (dispatch) => ({
+    findImagesByText:(text) => {
+        imageService.findImagesByText(text)
+            .then(results => dispatch({
+                images: results,
+                type: "FIND_IMAGES"
+            }))
+    },
+})
+
+export default connect(stpm, dtpm) (SearchScreen)
+
+
+
