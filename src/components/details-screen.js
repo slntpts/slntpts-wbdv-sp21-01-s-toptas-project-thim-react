@@ -19,7 +19,7 @@ const DetailsScreen = () => {
         <div>
             <button onClick={() => {history.goBack()} }>Back</button>
             <h2>{image.location}</h2>
-            <img className="wbdv-image" src={image.media_url}></img>
+            <img className="thim-image" src={image.media_url}></img>
             <p>
                 {image.caption}
             </p>

@@ -1,0 +1,29 @@
+.thim-image {
+    display: block;
+    max-width: 100%;
+    width: 500px;
+    height: 400px;
+
+}
+
+.thim-btn-search {
+    background-color : antiquewhite;
+}
+
+.thim-search-tip{
+    color:gray;
+}
+
+.thim-home-tabs{
+    width:100%;
+    font-family: "Lucida Handwriting", cursive;
+}
+
+.thim-page-header{
+    color:green;
+    font-family: "Lucida Handwriting", cursive;
+}
+
+.image-search-nav-link{
+    font-family: "Lucida Handwriting", cursive;
+}

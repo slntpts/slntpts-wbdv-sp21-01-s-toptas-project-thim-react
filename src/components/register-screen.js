@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
 import userService from '../services/user-service'
+import {Link} from "react-router-dom";
 
 const RegisterScreen = (
     {
@@ -18,7 +19,7 @@ const RegisterScreen = (
                         <label htmlFor="username" className="col-sm-2 col-form-label">
                             Username </label>
                         <div className="col-sm-10">
-                            <input className="form-control wbdv-field wbdv-username"
+                            <input className="form-control thim-field thim-username"
                                    id="username"
                                    placeholder="enter username"
                                    onChange={(e) => setUsernameValue(e.target.value)}>
@@ -55,17 +56,18 @@ const RegisterScreen = (
                     <div className="form-group row">
                         <label className="col-sm-2 col-form-label"></label>
                         <div className="col-sm-10">
-                            <a onClick={() => {
+                            <Link onClick={() => {
                                 createUser(usernameValue, passwordValue, verifyPasswordValue)
-                            }}className="btn btn-primary btn-block wbdv-login"
-                               href="../login">Sign up</a>
+                            }}className="btn btn-primary btn-block thim-login"
+                               to="/../login">Sign up
+                            </Link>
                             {/*TODO: If successful redirect to home page with user token, otherwise stay in the register page*/}
                             <div className="row">
                                 <div className="col-6">
-                                    <a href="../login">Login</a>
+                                    <Link to="/../login">Login</Link>
                                 </div>
                                 <div className="col-6">
-                                    <a href="../index.html" className="float-right">Cancel</a>
+                                    <a href="/" className="float-right">Cancel</a>
                                 </div>
                             </div>
                         </div>
