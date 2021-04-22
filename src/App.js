@@ -6,6 +6,9 @@ import HomeScreen from "./components/home-screen";
 import {BrowserRouter, Route} from "react-router-dom";
 import LoginScreen from "./components/login-screen";
 import RegisterScreen from "./components/register-screen";
+import Profile from "./components/users/profile";
+import Register from "./components/users/register";
+import Login from "./components/users/login";
 
 function App() {
   return (
@@ -21,10 +24,18 @@ function App() {
               <DetailsScreen/>
           </Route>
           <Route path="/../register" exact={true}>
-              <RegisterScreen/>
+              {/*<RegisterScreen/>*/}
+              <Register/>
+          </Route>
+          <Route path="/../profile" exact={true}>
+              <Profile/>
+          </Route>
+          <Route path="/../profile/:userId" exact={true}>
+              <Profile/>
           </Route>
           <Route path={["/../login"]} exact={true}>
-              <LoginScreen/>
+              {/*<LoginScreen/>*/}
+              <Login/>
           </Route>
       </BrowserRouter>
     </div>

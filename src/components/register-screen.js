@@ -10,6 +10,7 @@ const RegisterScreen = (
     const [usernameValue, setUsernameValue] = useState("");
     const [passwordValue, setPasswordValue] = useState("");
     const [verifyPasswordValue, setVerifyPasswordValue] = useState("");//TODO: use to check if password and ver password are same
+
     return (
         <>
             <div className="container">
