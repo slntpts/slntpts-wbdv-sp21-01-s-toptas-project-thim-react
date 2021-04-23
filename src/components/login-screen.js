@@ -1,12 +1,14 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
 import userService from '../services/user-service'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 const LoginScreen = (
     {
-        findUser,
+        login,
     }) => {
+
+    const history = useHistory()
     const [usernameValue, setUsernameValue] = useState("");
     const [passwordValue, setPasswordValue] = useState("");
     return (
@@ -43,9 +45,8 @@ const LoginScreen = (
                         <label className="col-sm-2 col-form-label"></label>
                         <div className="col-sm-10">
                             <Link onClick={() => {
-                                findUser(usernameValue, passwordValue)
-                            }}className="btn btn-primary btn-block thim-login"
-                               to="/">Login</Link>
+                                login(usernameValue, passwordValue, history)
+                            }}className="btn btn-primary btn-block thim-login">Login</Link>
                             <div className="row">
                                 <div className="col-6">
                                     <Link to="/../register">Sign Up</Link>
@@ -66,12 +67,8 @@ const LoginScreen = (
 const stpm = (state) => {}
 
 const dtpm = (dispatch) => ({
-    findUser: (username, password) => {
-        userService.retrieveUser(username, password)
-            .then(user => dispatch({
-                type: "FIND_USER",
-                user: user
-            }))
+    login: (username, password, history) => {
+        userService.login({username: username, password: password}, history)
     }
 })
 

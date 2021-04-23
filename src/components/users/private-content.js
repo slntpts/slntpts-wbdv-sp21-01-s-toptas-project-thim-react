@@ -1,6 +1,8 @@
 import React from 'react'
 
-const PrivateContent = () => {
+const PrivateContent = (
+    user
+) => {
     return (
         <div>
             <h2>Private Content</h2>

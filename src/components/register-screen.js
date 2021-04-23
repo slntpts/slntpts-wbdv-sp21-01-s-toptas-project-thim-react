@@ -1,15 +1,20 @@
 import React, {useState} from 'react'
 import {connect} from "react-redux";
 import userService from '../services/user-service'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 const RegisterScreen = (
     {
-        createUser,
+        register,
     }) => {
     const [usernameValue, setUsernameValue] = useState("");
     const [passwordValue, setPasswordValue] = useState("");
-    const [verifyPasswordValue, setVerifyPasswordValue] = useState("");//TODO: use to check if password and ver password are same
+    const [verifyPasswordValue, setVerifyPasswordValue] = useState("");
+    const [emailValue, setEmailValue] = useState("");
+    const [firstNameValue, setFirstNameValue] = useState("");
+    const [lastNameValue, setLastNameValue] = useState("");
+
+    const history = useHistory()
 
     return (
         <>
@@ -24,6 +29,42 @@ const RegisterScreen = (
                                    id="username"
                                    placeholder="enter username"
                                    onChange={(e) => setUsernameValue(e.target.value)}>
+                            </input>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <label htmlFor="firstname" className="col-sm-2 col-form-label">
+                            First Name </label>
+                        <div className="col-sm-10">
+                            <input className="form-control thim-field thim-username"
+                                   id="firstname"
+                                   placeholder="First name"
+                                   onChange={(e) => setFirstNameValue(e.target.value)}>
+                            </input>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <label htmlFor="lastname" className="col-sm-2 col-form-label">
+                            Last Name </label>
+                        <div className="col-sm-10">
+                            <input className="form-control thim-field thim-username"
+                                   id="lastname"
+                                   placeholder="Last name"
+                                   onChange={(e) => setLastNameValue(e.target.value)}>
+                            </input>
+                        </div>
+                    </div>
+
+                    <div className="form-group row">
+                        <label htmlFor="email" className="col-sm-2 col-form-label">
+                            Email </label>
+                        <div className="col-sm-10">
+                            <input className="form-control thim-field thim-username"
+                                   id="email"
+                                   placeholder="Email"
+                                   onChange={(e) => setEmailValue(e.target.value)}>
                             </input>
                         </div>
                     </div>
@@ -58,9 +99,9 @@ const RegisterScreen = (
                         <label className="col-sm-2 col-form-label"></label>
                         <div className="col-sm-10">
                             <Link onClick={() => {
-                                createUser(usernameValue, passwordValue, verifyPasswordValue)
+                                register(usernameValue, firstNameValue, lastNameValue, emailValue,  passwordValue, verifyPasswordValue, history)
                             }}className="btn btn-primary btn-block thim-login"
-                               to="/../login">Sign up
+                               > Sign up
                             </Link>
                             {/*TODO: If successful redirect to home page with user token, otherwise stay in the register page*/}
                             <div className="row">
@@ -82,18 +123,13 @@ const RegisterScreen = (
 const stpm = (state) => {}
 
 const dtpm = (dispatch) => ({
-    createUser: (username, password, verifyPassword) => {
+    register: (username, firstname, lastname, email, password, verifyPassword, history) => {
 
-        if(password != verifyPassword) {
+        if(password !== verifyPassword) {
             alert("PASSWORDS DO NOT MATCH!!")
         }
         else {
-
-            userService.createUser({username: username, password: password})
-                .then(user => dispatch({
-                    type: "CREATE_USER",
-                    user: user
-                }))
+            userService.register({username: username, first: firstname, last: lastname, email: email, password: password, role: "NORMAL" }, history)
         }
     }
 })

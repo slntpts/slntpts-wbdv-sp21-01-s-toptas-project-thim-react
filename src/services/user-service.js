@@ -1,4 +1,4 @@
-const USERS_URL = "TODO";
+const USERS_URL = "http://localhost:8080/api";
 
 export const createUser = (user) =>
     fetch(USERS_URL, {
@@ -10,18 +10,84 @@ export const createUser = (user) =>
     })
         .then(response => response.json())
 
-export const retrieveUser = (username, password) =>
-    fetch(`${USERS_URL}/${username}/${password}`)
+export const retrieveUser = (user) =>
+    fetch(`${USERS_URL}/users/${user.username}/${user.password}`)
         .then(response => response.json())
 
-export const deleteUser = (userId) =>
-    fetch(`${USERS_URL}/${userId}`, {
+export const deleteUser = (user) =>
+    fetch(`${USERS_URL}/users/${user.id}`, {
         method: 'DELETE'
     })
         .then(response => response.json())
 
+export const findAllUsers = () =>
+    fetch(`${USERS_URL}/users`)
+        .then(response => response.json())
+
+
+export const register = (user, history) =>
+{
+    fetch(`${USERS_URL}/register`,{
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(user),
+        headers: {
+            'content-type': "application/json"
+        }
+    }).then(response => response.json())
+        .catch(error => {
+            console.log(error)
+        })
+        .then((actualUser) => {
+            history.push("/../profile")
+        })
+}
+
+export const login = (credentials, history) =>
+{
+    fetch(`${USERS_URL}/login`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(credentials),
+        headers: {
+            'content-type': "application/json"
+        }
+    })
+        .then(response => response.json())
+        .then(existingUser => {
+            if(existingUser) {
+                history.push("/../profile")
+            }
+        })
+}
+
+export const getMyProfile = () =>
+{
+    return(
+        fetch("http://localhost:8080/api/profile", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(response => response.json()))
+}
+
+export const getOtherProfile = (userId) =>
+{
+    return fetch(`http://localhost:8080/api/profile/${userId}`)
+        .then(response => response.json())
+}
+
+
 export default {
     createUser,
     retrieveUser,
-    deleteUser: deleteUser
+    deleteUser: deleteUser,
+    findAllUsers,
+    register,
+    login,
+    getMyProfile,
+    getOtherProfile,
 }

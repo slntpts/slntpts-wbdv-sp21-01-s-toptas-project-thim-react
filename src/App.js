@@ -1,14 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import SearchScreen from "./components/home-screen";
-import DetailsScreen from "./components/details-screen";
 import HomeScreen from "./components/home-screen";
+import DetailsScreen from "./components/details-screen";
 import {BrowserRouter, Route} from "react-router-dom";
 import LoginScreen from "./components/login-screen";
 import RegisterScreen from "./components/register-screen";
-import Profile from "./components/users/profile";
-import Register from "./components/users/register";
-import Login from "./components/users/login";
+import Profile from "./components/profile-page";
 
 function App() {
   return (
@@ -18,14 +15,14 @@ function App() {
           {/*    <HomeScreen/>*/}
           {/*</Route>*/}
           <Route path={["/", "/:text"]} exact={true}>
-              <SearchScreen/>
+              <HomeScreen/>
           </Route>
           <Route path = "/details/:imageID" exact={true}>
               <DetailsScreen/>
           </Route>
           <Route path="/../register" exact={true}>
-              {/*<RegisterScreen/>*/}
-              <Register/>
+              <RegisterScreen/>
+              {/*<Register/>*/}
           </Route>
           <Route path="/../profile" exact={true}>
               <Profile/>
@@ -34,8 +31,8 @@ function App() {
               <Profile/>
           </Route>
           <Route path={["/../login"]} exact={true}>
-              {/*<LoginScreen/>*/}
-              <Login/>
+              <LoginScreen/>
+              {/*<Login/>*/}
           </Route>
       </BrowserRouter>
     </div>

@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom"
 import PrivateContent from "./private-content";
 
 
-const Profile = () => {
+const Profile2 = () => {
     const {userId} = useParams()
     const [user, setUser] = useState({})
     const [otherUser, setOtherUser] = useState(null)
@@ -56,4 +56,4 @@ const Profile = () => {
         )
     }
 
-export default Profile
+export default Profile2

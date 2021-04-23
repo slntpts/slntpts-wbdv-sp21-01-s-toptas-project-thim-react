@@ -8,8 +8,9 @@ import userReducer from "../reducers/user-reducer";
 import imageReducer from "../reducers/image-reducer";
 import postReducer from "../reducers/post-reducer";
 import './home-screen-style.css';
-import Post from "./post";
-import PostList from "./post-list";
+import userService, {getMyProfile} from "../services/user-service";
+// import Post from "./post";
+// import PostList from "./post-list";
 
 
 const reducer = combineReducers({
@@ -29,10 +30,12 @@ const HomeScreen = (
         posts = [],
         findImagesByText,
         findAllPosts,
+        getMyProfile
     }) => {
     const history = useHistory();
     const {text} = useParams()//text(comes from url in Apps.js) is defined to be used as a parameter here.
     const [searchText, setSearchText] = useState(text)
+    const [user, setUser] = useState("")
 
     useEffect(() => {
 
@@ -40,6 +43,8 @@ const HomeScreen = (
             setSearchText(text)
             findImagesByText(text)
         }
+
+        getMyProfile(setUser)
 
     }, [])
 
@@ -53,9 +58,9 @@ const HomeScreen = (
                     <li className="nav-item">
                         <a className="nav-link active" href="/">Home</a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="/">Blog</a>
-                    </li>
+                    {/*<li className="nav-item">*/}
+                    {/*    <a className="nav-link" href="/">Blog</a>*/}
+                    {/*</li>*/}
                     <li className="nav-item">
                         <a className="nav-link" href="/">About</a>
                     </li>
@@ -73,6 +78,18 @@ const HomeScreen = (
                             </Link>
                         </a>
                     </li>
+
+                    {
+                        user &&
+                        <li className="nav-item">
+                            <a className="nav-link">
+                                {"Hi "}
+                                <Link classname="nav-link" to="/../profile">
+                                    {user.username}
+                                </Link>
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
 
@@ -96,7 +113,7 @@ const HomeScreen = (
             <br/>
 
             <div class="row">
-                <div class="col-9">
+                <div class="col-12">
                     <div className="row">
                         {
                             //TODO: Write searchText & searchText instead of text && text to retrieve images on the fly
@@ -128,9 +145,9 @@ const HomeScreen = (
                     </div>
                 </div>
 
-                <div class="col-3">
-                    <PostList/>
-                </div>
+                {/*<div class="col-3">*/}
+                {/*    <PostList/>*/}
+                {/*</div>*/}
 
             </div>
         </div>
@@ -162,6 +179,10 @@ const dtpm = (dispatch) => ({
                 type: "FIND_POSTS"
             }))
     },
+
+    getMyProfile: (setUser) => {
+        userService.getMyProfile().then(currentUser => {
+            setUser(currentUser)})},
 })
 
 export default connect(stpm, dtpm) (HomeScreen)

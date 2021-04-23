@@ -5,6 +5,9 @@ const Register = () => {
     const[user, setUser] = useState({})
     const history = useHistory()
     const register = () => {
+
+        console.log(user)
+
         //TODO: move this to a service file
         fetch("http://localhost:8080/api/register",{
             method: "POST",
