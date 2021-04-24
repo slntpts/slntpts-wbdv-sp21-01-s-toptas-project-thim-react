@@ -27,7 +27,7 @@ function App() {
           <Route path="/../profile" exact={true}>
               <Profile/>
           </Route>
-          <Route path="/../profile/:userId" exact={true}>
+          <Route path="/profile/:userId" exact={true}>
               <Profile/>
           </Route>
           <Route path={["/../login"]} exact={true}>

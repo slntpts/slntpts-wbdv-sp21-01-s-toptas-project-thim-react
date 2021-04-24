@@ -5,6 +5,7 @@ const initialState = {
 }
 
 const userReducer = (state = initialState, action) => {
+
     switch (action.type){
 
         case "CREATE_USER":
@@ -16,10 +17,16 @@ const userReducer = (state = initialState, action) => {
                 ]
             }
         case "DELETE_USER":
+
+            console.log("ACTION user _id:" + action.user._id)
+            console.log("ACTION user id:" + action.user.id)
+            console.log("ACTION user name:" + action.user.first)
+            console.log(action.user)
+
             return {
                 ...state,
                 users: state.users.filter(user => {
-                    if(user.username !== action.username){
+                    if(user.id !== action.user.id){
                         return true
                     }else{
                         return false
@@ -30,7 +37,7 @@ const userReducer = (state = initialState, action) => {
             return{
                 ...state,
                 users: state.users.map(user => {
-                    if(user.username === action.username){
+                    if(user.id === action.user.id){
                         return action.user
                     }else{
                         return user
@@ -41,6 +48,17 @@ const userReducer = (state = initialState, action) => {
             return{
                 ...state,
                 users: action.users
+            }
+        case "FIND_USER":
+            return{
+                ...state,
+                users: state.users.map(user => {
+                    if(user.id === action.user.id){
+                        return action.user
+                    }else{
+                        return user
+                    }
+                })
             }
         default:
             return state

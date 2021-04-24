@@ -43,6 +43,17 @@ export const register = (user, history) =>
         })
 }
 
+export const updateUser = (user) =>
+    fetch(`${USERS_URL}/users/${user.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(user),
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(response => response.json())
+
+
 export const login = (credentials, history) =>
 {
     fetch(`${USERS_URL}/login`, {
@@ -64,7 +75,7 @@ export const login = (credentials, history) =>
 export const getMyProfile = () =>
 {
     return(
-        fetch("http://localhost:8080/api/profile", {
+        fetch(`${USERS_URL}/profile`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -76,7 +87,7 @@ export const getMyProfile = () =>
 
 export const getOtherProfile = (userId) =>
 {
-    return fetch(`http://localhost:8080/api/profile/${userId}`)
+    return fetch(`${USERS_URL}/profile/${userId}`)
         .then(response => response.json())
 }
 
@@ -90,4 +101,5 @@ export default {
     login,
     getMyProfile,
     getOtherProfile,
+    updateUser,
 }

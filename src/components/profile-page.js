@@ -23,10 +23,8 @@ const Profile = ({
     return (
         <div>
             <h1>Profile</h1>
-            {JSON.stringify(user)}
-            <ContentPublic/>
             {
-                //user.role === "ADMIN" &&
+                user && !otherUser && user.role === "ADMIN" &&
                 <AdminContent/>
             }
             {
@@ -34,14 +32,24 @@ const Profile = ({
                 <PrivateContent user={user}/>
             }
             {
-                user && !otherUser &&
-                <PrivateContent user = {otherUser}/>
+                //current user's profile
+                user && !otherUser && user.role !== "ADMIN" &&
+                <PrivateContent user = {user}
+                                updateUser = {setUser}/>
+            }
+            {
+                otherUser && user.id !== otherUser.id &&
+                <ContentPublic user = {otherUser}/>
             }
         </div>
     )
 }
 
-const stpm = (state) => {}
+const stpm = (state) => {
+    return {
+        user: state.userReducer.user
+    }
+}
 
 const dtpm = (dispatch) => ({
     getMyProfile: (setUser) => {

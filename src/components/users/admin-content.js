@@ -15,7 +15,10 @@ const AdminContent = ({
 
     useEffect(() => {
         findAllUsers()
+        console.log("Rendering Use Effect")
     }, [])
+
+    console.log("Rendering Admin!!")
 
     return(
 
@@ -25,13 +28,13 @@ const AdminContent = ({
                 <thead>
                 <tr>
                     <th className="col-md-2 d-none d-lg-table-cell">Username</th>
-                    <th class="col-md-4">Firstname</th>
-                    <th class="col-md-3 d-none d-md-table-cell d-lg-table-cell">Lastname</th>
+                    <th className="col-md-4">Firstname</th>
+                    <th className="col-md-3 d-none d-md-table-cell d-lg-table-cell">Lastname</th>
                     <th className="col-md-2 d-none d-lg-table-cell">Email</th>
-                    <th class="col-md-2 d-none d-lg-table-cell">Password</th>
-                    <th class="d-block"><Link to="/">
-                        <i class = "col-md-1" className="fas fa-2x fa-th"></i>
-                    </Link></th>
+                    <th className="col-md-2 d-none d-lg-table-cell">Password</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -69,17 +72,17 @@ const dtpm = (dispatch) => ({
     },
     deleteUser: (user) => {
         userService.deleteUser(user)
-            .then(user => dispatch({
-                type: "DELETE_USER",
-                user: user
-            }))
+        dispatch({
+            type: "DELETE_USER",
+            user: user
+        })
     },
     updateUser: (user) => {
         userService.updateUser(user)
-            .then(user => dispatch({
-                type: "UPDATE_USER",
-                user: user
-            }))
+        dispatch({
+            type: "UPDATE_USER",
+            user: user
+        })
     },
     findAllUsers: () => {
         userService.findAllUsers()
