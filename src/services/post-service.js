@@ -1,4 +1,4 @@
-const HEROKU_URL = "http://localhost:8080";//"https://cs5610-sp21-stoptas-javaserver.herokuapp.com/";
+const HEROKU_URL = "https://cs5610-sp21-stoptas-javaserver.herokuapp.com/";//"http://localhost:8080";
 
 export const createPost = (post) =>
     fetch(`${HEROKU_URL}/api/posts`, {

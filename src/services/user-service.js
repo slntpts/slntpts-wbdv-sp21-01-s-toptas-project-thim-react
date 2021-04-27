@@ -1,4 +1,4 @@
-const USERS_URL = "http://localhost:8080/api";
+const USERS_URL = "https://cs5610-sp21-stoptas-javaserver.herokuapp.com/";//"http://localhost:8080/api";
 
 export const createUser = (user) =>
     fetch(USERS_URL, {
