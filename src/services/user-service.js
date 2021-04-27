@@ -1,4 +1,4 @@
-const USERS_URL = "https://slntpts-wbdv-sp21-thim-server.herokuapp.com/api";//"http://localhost:8080/api";
+const USERS_URL = "http://slntpts-wbdv-sp21-thim-server.herokuapp.com/api";//"http://localhost:8080/api";
 
 export const createUser = (user) =>
     fetch(USERS_URL, {
