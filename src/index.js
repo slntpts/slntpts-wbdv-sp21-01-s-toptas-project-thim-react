@@ -10,6 +10,7 @@ import {combineReducers, createStore} from "redux";
 import imageReducer from "./reducers/image-reducer";
 import postReducer from "./reducers/post-reducer";
 import userReducer from "./reducers/user-reducer";
+import commentReducer from "./reducers/comment-reducer";
 
 
 const reducer = combineReducers({
@@ -17,7 +18,8 @@ const reducer = combineReducers({
     //and once we do that we provide reducer as a top reducer to the createStore.
     imageReducer: imageReducer,
     userReducer: userReducer,
-    postReducer: postReducer
+    postReducer: postReducer,
+    commentReducer: commentReducer
 })
 
 const store = createStore(reducer)//we grab the store from image reducer.
