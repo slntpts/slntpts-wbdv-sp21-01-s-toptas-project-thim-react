@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
 
-const HEROKU_URL = "https://slntpts-wbdv-sp21-thim-server.herokuapp.com";//"http://localhost:8080";
+const HEROKU_URL = "http://slntpts-wbdv-sp21-thim-server.herokuapp.com";//"http://localhost:8080";
 
 const Register = () => {
     const[user, setUser] = useState({})
