@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 
+const HEROKU_URL = "http://slntpts-wbdv-sp21-thim-server.herokuapp.com";//"http://localhost:8080";
+
 const Login = () => {
     const history = useHistory()
     const [credentials, setCredentials] = useState({})
     const login = () => {
-        fetch("http://localhost:8080/api/login", {
+        fetch(`${HEROKU_URL}/api/login`, {
             credentials: "include",
             headers: {
                 'content-type': 'application/json'

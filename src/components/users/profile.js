@@ -4,6 +4,7 @@ import AdminContent from "./admin-content";
 import {useParams} from "react-router-dom"
 import PrivateContent from "./private-content";
 
+const HEROKU_URL = "http://slntpts-wbdv-sp21-thim-server.herokuapp.com";//"http://localhost:8080";
 
 const Profile2 = () => {
     const {userId} = useParams()
@@ -16,7 +17,7 @@ const Profile2 = () => {
         //         .then(response => response.json())
         //         .then(currentUser => setUser(currentUser))
         // }else {
-        fetch("http://localhost:8080/api/profile", {
+        fetch(`${HEROKU_URL}/api/profile`, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -27,7 +28,7 @@ const Profile2 = () => {
             .then(currentUser => {
                 setUser(currentUser)
                 if (userId) {
-                    fetch(`http://localhost:8080/api/profile/${userId}`)
+                    fetch(`${HEROKU_URL}/api/profile/${userId}`)
                         .then(response => response.json())
                         .then(otherUser => {
                             setOtherUser(otherUser)

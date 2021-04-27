@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
 
+const HEROKU_URL = "http://slntpts-wbdv-sp21-thim-server.herokuapp.com";//"http://localhost:8080";
+
 const Register = () => {
     const[user, setUser] = useState({})
     const history = useHistory()
@@ -9,7 +11,7 @@ const Register = () => {
         console.log(user)
 
         //TODO: move this to a service file
-        fetch("http://localhost:8080/api/register",{
+        fetch(`${HEROKU_URL}/api/register`,{
             method: "POST",
             credentials: "include",
             body: JSON.stringify(user),
