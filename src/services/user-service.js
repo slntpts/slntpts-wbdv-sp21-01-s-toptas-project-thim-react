@@ -72,6 +72,24 @@ export const login = (credentials, history) =>
         })
 }
 
+// export const logout = (credentials, history) =>
+// {
+//     fetch(`${USERS_URL}`, {
+//         method: "POST",
+//         credentials: "include",
+//         body: JSON.stringify(credentials),
+//         headers: {
+//             'content-type': "application/json"
+//         }
+//     })
+//         .then(response => response.json())
+//         .then(existingUser => {
+//             if(existingUser) {
+//                 history.push("/")
+//             }
+//         })
+// }
+
 export const getMyProfile = () =>
 {
     return(

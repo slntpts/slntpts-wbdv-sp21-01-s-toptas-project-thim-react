@@ -80,6 +80,13 @@ const HomeScreen = (
                             </Link>
                         </a>
                     </li>
+                    {/*<li className="nav-item">*/}
+                    {/*    <a className="nav-link">*/}
+                    {/*        <Link classname="nav-link" to="/">*/}
+                    {/*            Logout*/}
+                    {/*        </Link>*/}
+                    {/*    </a>*/}
+                    {/*</li>*/}
 
                     {
                         user &&
