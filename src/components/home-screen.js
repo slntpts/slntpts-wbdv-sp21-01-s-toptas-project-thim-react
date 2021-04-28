@@ -32,7 +32,8 @@ const HomeScreen = (
         posts = [],
         findImagesByText,
         findAllPosts,
-        getMyProfile
+        getMyProfile,
+        logout,
     }) => {
     const history = useHistory();
     const {text} = useParams()//text(comes from url in Apps.js) is defined to be used as a parameter here.
@@ -73,20 +74,31 @@ const HomeScreen = (
                             </Link>
                         </a>
                     </li>
-                    <li className="nav-item">
-                        <a className="nav-link">
-                            <Link classname="nav-link" to="/../login">
-                                Login
-                            </Link>
-                        </a>
-                    </li>
-                    {/*<li className="nav-item">*/}
-                    {/*    <a className="nav-link">*/}
-                    {/*        <Link classname="nav-link" to="/">*/}
-                    {/*            Logout*/}
-                    {/*        </Link>*/}
-                    {/*    </a>*/}
-                    {/*</li>*/}
+
+                    {
+                        !user &&
+                        <li className="nav-item">
+                            <a className="nav-link">
+                                <Link classname="nav-link" to="/../login">
+                                    Login
+                                </Link>
+                            </a>
+                        </li>
+                    }
+
+                    {
+                        user &&
+                        <li className="nav-item">
+                            <a className="nav-link">
+                                <Link classname="nav-link" to="/"
+                                      onClick={() => {
+                                          logout(setUser)
+                                      }}>
+                                    Logout
+                                </Link>
+                            </a>
+                        </li>
+                    }
 
                     {
                         user &&
@@ -192,6 +204,12 @@ const dtpm = (dispatch) => ({
     getMyProfile: (setUser) => {
         userService.getMyProfile().then(currentUser => {
             setUser(currentUser)})},
+
+    logout: (setUser) => {
+        userService.logout()
+        setUser(undefined)
+        localStorage.clear();
+    },
 })
 
 export default connect(stpm, dtpm) (HomeScreen)

@@ -1,4 +1,4 @@
-const USERS_URL = "http://slntpts-wbdv-sp21-thim-server.herokuapp.com/api";//"http://localhost:8080/api";
+const USERS_URL = "http://localhost:8080/api";//"http://slntpts-wbdv-sp21-thim-server.herokuapp.com/api";
 
 export const createUser = (user) =>
     fetch(USERS_URL, {
@@ -72,23 +72,17 @@ export const login = (credentials, history) =>
         })
 }
 
-// export const logout = (credentials, history) =>
-// {
-//     fetch(`${USERS_URL}`, {
-//         method: "POST",
-//         credentials: "include",
-//         body: JSON.stringify(credentials),
-//         headers: {
-//             'content-type': "application/json"
-//         }
-//     })
-//         .then(response => response.json())
-//         .then(existingUser => {
-//             if(existingUser) {
-//                 history.push("/")
-//             }
-//         })
-// }
+export const logout = () =>
+{
+    return(
+        fetch(`${USERS_URL}/logout`, {
+            method: "GET",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(response => response.json()))
+}
 
 export const getMyProfile = () =>
 {
@@ -120,4 +114,5 @@ export default {
     getMyProfile,
     getOtherProfile,
     updateUser,
+    logout,
 }
