@@ -1,4 +1,4 @@
-const HEROKU_URL = "http://localhost:8080";//"http://slntpts-wbdv-sp21-thim-server.herokuapp.com";
+const HEROKU_URL = "http://slntpts-wbdv-sp21-thim-server.herokuapp.com";//"http://localhost:8080";
 
 export const createComment = (comment) =>
     fetch(`${HEROKU_URL}/api/comments`, {
