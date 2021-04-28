@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react'
-import {useHistory, useParams} from 'react-router-dom'
+import {Link, useHistory, useParams} from 'react-router-dom'
 import imageService from '../services/image-service'
 import commentService from '../services/comment-service'
 import {connect} from "react-redux";
 import Post from "./post";
 import Comment from "./comment";
+import userService from "../services/user-service";
 
 
 const DetailsScreen = ({
@@ -13,13 +14,17 @@ const DetailsScreen = ({
                            createComment,
                            updateComment,
                            deleteComment,
+                           getMyProfile,
                        }) => {
     const {imageID} = useParams();
     const history = useHistory();
     const [image, setImage] = useState({})
+    const [user, setUser] = useState({})
+    const [commentText, setTextValue] = useState("")
     useEffect(() => {
         findImageByImageID();
         findCommentsByImageId(imageID)
+        getMyProfile(setUser)
     }, [])
     const findImageByImageID = () => {
         imageService.findImageByImageID(imageID)
@@ -43,12 +48,51 @@ const DetailsScreen = ({
                             {
                                 <Comment comment={comment}
                                       deleteComment={deleteComment}
-                                      updateComment={updateComment}/>
+                                      updateComment={updateComment}
+                                      user={user}
+                                />
                             }
                         </li>
                     )
                 }
             </ul>
+            {
+                console.log(user)
+            }
+            {
+                user.id &&
+                <div>
+                    <br/>
+                    <br/>
+                    <textarea
+                        onChange={(e) => setTextValue(e.target.value)}
+                        value={commentText} className="form-control">
+                </textarea>
+                    <button className="btn btn-success float-right"
+                            onClick={() => {
+                                createComment(commentText, imageID, user);
+                                setTextValue("")
+                            }}
+                    >Comment
+                    </button>
+                </div>
+            }
+            {
+                !user.id &&
+                <div>
+                    <br/>
+                    <br/>
+                    <textarea
+                        onChange={(e) => setTextValue(e.target.value)}
+                        value={commentText} className="form-control">
+                </textarea>
+                    <button className="btn btn-success float-right">
+                        <Link classname="nav-link" to="/../login">
+                            Comment
+                        </Link>
+                    </button>
+                </div>
+            }
         </div>
     )
 }
@@ -71,8 +115,11 @@ const dtpm = (dispatch) => ({
 
             )
     },
-    createComment: () => {
-        commentService.createComment({text: "New Comment"})
+    createComment: (commentText, imageID, user) => {
+
+        console.log(user)
+
+        commentService.createComment({text: commentText, username: user.username, userId: user.id, imageId: imageID})
             .then(comment => dispatch({
                 type: "CREATE_COMMENT",
                 comment: comment
@@ -86,6 +133,10 @@ const dtpm = (dispatch) => ({
         commentService.deleteComment(commentToDelete)
             .then(status => dispatch({type: "DELETE_COMMENT", commentToDelete: commentToDelete}))
     },
+
+    getMyProfile: (setUser) => {
+        userService.getMyProfile().then(currentUser => {
+            setUser(currentUser)})},
 })
 
 export default connect(stpm, dtpm) (DetailsScreen)

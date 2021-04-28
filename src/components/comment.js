@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 
 const Comment = (
     {
+        user,
         comment = {},
         updateComment,
         deleteComment,
@@ -26,7 +27,7 @@ const Comment = (
                 </>
             }
             {
-                !comment.isEditing &&
+                !comment.isEditing && (comment.userId === user.id || user.type === "ADMIN") &&
                 <i onClick={() => updateComment({...comment, isEditing: true})}
                    className="fas fa-2x fa-cog float-right"></i>
             }
